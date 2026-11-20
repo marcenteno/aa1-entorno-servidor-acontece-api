@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/api/usuarios"
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "fecha": "2026-11-19T10:00:00",
+      "estado": 400,
+      "error": "Error de validación",
+      "detalles": {
+        "nombre": "El nombre no puede estar vacío",
+        "email": "Debe introducir un email válido"
+      }
+    }
+  }
+}

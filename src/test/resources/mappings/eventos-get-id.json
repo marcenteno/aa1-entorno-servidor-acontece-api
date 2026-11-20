@@ -1,0 +1,29 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/api/eventos/4"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": 4,
+      "titulo": "Concierto de prueba",
+      "descripcion": "Concierto musical de prueba para comprobar la API",
+      "ubicacion": "Zaragoza",
+      "fechaInicio": "2026-12-20T19:00:00",
+      "fechaFin": "2026-12-20T22:00:00",
+      "precio": 0.0,
+      "aforo": 200,
+      "activo": true,
+      "organizador": {
+        "id": 2
+      },
+      "categoria": {
+        "id": 2
+      }
+    }
+  }
+}

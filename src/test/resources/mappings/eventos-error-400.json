@@ -1,0 +1,25 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/api/eventos",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": "$[?(@.titulo == '')]"
+      }
+    ]
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "fecha": "2026-11-19T10:00:00",
+      "estado": 400,
+      "error": "Error de validación",
+      "detalles": {
+        "titulo": "El título no puede estar vacío"
+      }
+    }
+  }
+}

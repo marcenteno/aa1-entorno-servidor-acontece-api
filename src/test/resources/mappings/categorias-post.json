@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/api/categorias"
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": 4,
+      "nombre": "Cultura",
+      "descripcion": "Eventos culturales y exposiciones",
+      "color": "#9B59B6",
+      "icono": "palette",
+      "fechaCreacion": "2026-11-20",
+      "activa": true
+    }
+  }
+}

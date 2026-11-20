@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "PUT",
+    "url": "/api/categorias/2"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": 2,
+      "nombre": "Música actualizada",
+      "descripcion": "Categoría de conciertos y espectáculos musicales",
+      "color": "#FF6B6B",
+      "icono": "music",
+      "fechaCreacion": "2026-11-20",
+      "activa": true
+    }
+  }
+}

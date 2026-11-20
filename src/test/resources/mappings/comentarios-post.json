@@ -1,0 +1,34 @@
+{
+  "request": {
+    "method": "POST",
+    "urlPath": "/api/comentarios",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": {
+          "expression": "$.puntuacion",
+          "equalTo": "5"
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": 2,
+      "titulo": "Evento increíble",
+      "texto": "Una experiencia fantástica",
+      "puntuacion": 5,
+      "fechaComentario": "2026-11-20T13:00:00",
+      "visible": true,
+      "usuario": {
+        "id": 2
+      },
+      "evento": {
+        "id": 4
+      }
+    }
+  }
+}

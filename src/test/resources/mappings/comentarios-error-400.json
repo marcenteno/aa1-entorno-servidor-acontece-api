@@ -1,0 +1,29 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "POST",
+    "urlPath": "/api/comentarios",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": {
+          "expression": "$.puntuacion",
+          "equalTo": "6"
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "fecha": "2026-11-20T10:00:00",
+      "estado": 400,
+      "error": "Error de validación",
+      "detalles": {
+        "puntuacion": "La puntuación debe estar entre 1 y 5"
+      }
+    }
+  }
+}

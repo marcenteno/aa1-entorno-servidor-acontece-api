@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/api/inscripciones/999999"
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "fecha": "2026-11-20T10:00:00",
+      "estado": 404,
+      "error": "No encontrado",
+      "mensaje": "Inscripción no encontrada: 999999"
+    }
+  }
+}

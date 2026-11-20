@@ -1,0 +1,29 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "POST",
+    "urlPath": "/api/inscripciones",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": {
+          "expression": "$.precioPagado",
+          "equalTo": "-5"
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "fecha": "2026-11-20T10:00:00",
+      "estado": 400,
+      "error": "Error de validación",
+      "detalles": {
+        "precioPagado": "El precio pagado no puede ser negativo"
+      }
+    }
+  }
+}

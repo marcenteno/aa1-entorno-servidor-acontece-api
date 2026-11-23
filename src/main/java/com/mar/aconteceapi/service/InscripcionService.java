@@ -45,6 +45,12 @@ public class InscripcionService {
                 .existsByUsuarioIdAndEventoId(usuarioId, eventoId);
     }
 
+    public List<Inscripcion> buscarConFiltros(
+            String estado, Boolean asistencia, Float precioPagado) {
+        return inscripcionRepository.buscarConFiltros(
+                estado, asistencia, precioPagado);
+    }
+
     @Transactional
     public Inscripcion crear(Inscripcion inscripcion) {
         return inscripcionRepository.save(inscripcion);

@@ -56,6 +56,18 @@ public class InscripcionController {
                 inscripcionService.buscarPorEstado(estado));
     }
 
+    // Buscar inscripciones combinando hasta tres filtros
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Inscripcion>> buscarConFiltros(
+            @RequestParam(required = false) String estado,
+            @RequestParam(required = false) Boolean asistencia,
+            @RequestParam(required = false) Float precioPagado) {
+
+        return ResponseEntity.ok(
+                inscripcionService.buscarConFiltros(
+                        estado, asistencia, precioPagado));
+    }
+
     // Crear inscripción
     @PostMapping
     public ResponseEntity<Inscripcion> crear(

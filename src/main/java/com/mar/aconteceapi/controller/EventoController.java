@@ -60,6 +60,16 @@ public class EventoController {
                 eventoService.obtenerPorOrganizador(organizadorId));
     }
 
+    // Buscar eventos combinando hasta tres filtros
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Evento>> buscarConFiltros(
+            @RequestParam(required = false) String titulo,
+            @RequestParam(required = false) String ubicacion,
+            @RequestParam(required = false) Boolean activo) {
+        return ResponseEntity.ok(
+                eventoService.buscarConFiltros(titulo, ubicacion, activo));
+    }
+
     // Crear evento
     @PostMapping
     public ResponseEntity<Evento> crear(

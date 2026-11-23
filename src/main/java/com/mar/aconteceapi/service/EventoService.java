@@ -44,6 +44,10 @@ public class EventoService {
         return eventoRepository.findByOrganizadorId(organizadorId);
     }
 
+    public List<Evento> buscarConFiltros(String titulo, String ubicacion, Boolean activo) {
+        return eventoRepository.buscarConFiltros(titulo, ubicacion, activo);
+    }
+
     @Transactional
     public Evento crear(Evento evento) {
         return eventoRepository.save(evento);

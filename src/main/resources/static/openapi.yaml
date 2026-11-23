@@ -172,6 +172,43 @@ paths:
         '500':
           $ref: '#/components/responses/ErrorInterno'
 
+  /api/usuarios/buscar:
+    get:
+      tags:
+        - Usuarios
+      summary: Buscar usuarios combinando hasta tres filtros
+      description: Permite buscar usuarios por nombre, apellidos y estado activo. Todos los parámetros son opcionales y se pueden combinar.
+      parameters:
+        - name: nombre
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Nombre del usuario
+        - name: apellidos
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Apellidos del usuario
+        - name: activo
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Estado activo del usuario
+      responses:
+        '200':
+          description: Lista de usuarios que cumplen los filtros indicados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Usuario'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
   # =========================
   # EVENTOS
   # =========================
@@ -361,6 +398,43 @@ paths:
         '500':
           $ref: '#/components/responses/ErrorInterno'
 
+  /api/eventos/buscar:
+    get:
+      tags:
+        - Eventos
+      summary: Buscar eventos combinando hasta tres filtros
+      description: Permite buscar eventos por título, ubicación y estado activo. Todos los parámetros son opcionales y se pueden combinar.
+      parameters:
+        - name: titulo
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Título del evento
+        - name: ubicacion
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Ubicación del evento
+        - name: activo
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Estado activo del evento
+      responses:
+        '200':
+          description: Lista de eventos que cumplen los filtros indicados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Evento'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
   # =========================
   # CATEGORÍAS
   # =========================
@@ -502,6 +576,45 @@ paths:
                   $ref: '#/components/schemas/Categoria'
         '500':
           $ref: '#/components/responses/ErrorInterno'
+
+
+  /api/categorias/buscar:
+    get:
+      tags:
+        - Categorías
+      summary: Buscar categorías combinando hasta tres filtros
+      description: Permite buscar categorías por nombre, descripción y estado activo. Todos los parámetros son opcionales y se pueden combinar.
+      parameters:
+        - name: nombre
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Nombre de la categoría
+        - name: descripcion
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Descripción de la categoría
+        - name: activa
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Estado activo de la categoría
+      responses:
+        '200':
+          description: Lista de categorías que cumplen los filtros indicados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Categoria'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
 
   # =========================
   # COMENTARIOS
@@ -695,6 +808,46 @@ paths:
         '500':
           $ref: '#/components/responses/ErrorInterno'
 
+  /api/comentarios/buscar:
+    get:
+      tags:
+        - Comentarios
+      summary: Buscar comentarios combinando hasta tres filtros
+      description: Permite buscar comentarios por título, puntuación y visibilidad. Todos los parámetros son opcionales y se pueden combinar.
+      parameters:
+        - name: titulo
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Título del comentario (búsqueda parcial)
+        - name: puntuacion
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
+          description: Puntuación del comentario
+        - name: visible
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Indica si el comentario es visible
+      responses:
+        '200':
+          description: Lista de comentarios que cumplen los filtros indicados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comentario'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+
   # =========================
   # INSCRIPCIONES
   # =========================
@@ -859,6 +1012,45 @@ paths:
       responses:
         '200':
           description: Lista de inscripciones con ese estado
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Inscripcion'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+
+  /api/inscripciones/buscar:
+    get:
+      tags:
+        - Inscripciones
+      summary: Buscar inscripciones combinando hasta tres filtros
+      description: Permite buscar inscripciones por estado, asistencia y precio pagado. Todos los parámetros son opcionales y se pueden combinar.
+      parameters:
+        - name: estado
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Estado de la inscripción
+        - name: asistencia
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Indica si el usuario ha asistido
+        - name: precioPagado
+          in: query
+          required: false
+          schema:
+            type: number
+            format: float
+          description: Precio abonado por la inscripción
+      responses:
+        '200':
+          description: Lista de inscripciones que cumplen los filtros indicados
           content:
             application/json:
               schema:

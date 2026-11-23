@@ -46,6 +46,17 @@ public class UsuarioController {
         return ResponseEntity.of(usuarioService.buscarPorNombre(nombre));
     }
 
+    // Buscar usuarios combinando hasta tres filtros
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Usuario>> buscarConFiltros(
+            @RequestParam(required = false) String nombre,
+            @RequestParam(required = false) String apellidos,
+            @RequestParam(required = false) Boolean activo) {
+
+        return ResponseEntity.ok(
+                usuarioService.buscarConFiltros(nombre, apellidos, activo));
+    }
+
     // Crear usuario
     @PostMapping
     public ResponseEntity<Usuario> crear(

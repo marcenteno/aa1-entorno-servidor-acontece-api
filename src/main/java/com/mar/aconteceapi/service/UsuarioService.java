@@ -37,6 +37,10 @@ public class UsuarioService {
         return usuarioRepository.findByNombre(nombre);
     }
 
+    public List<Usuario> buscarConFiltros(String nombre, String apellidos, Boolean activo) {
+        return usuarioRepository.buscarConFiltros(nombre, apellidos, activo);
+    }
+
     @Transactional
     public Usuario crear(Usuario usuario) {
         return usuarioRepository.save(usuario);

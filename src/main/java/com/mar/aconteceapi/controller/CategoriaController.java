@@ -45,6 +45,16 @@ public class CategoriaController {
         return ResponseEntity.ok(categoriaService.obtenerActivas());
     }
 
+    // Buscar categorías combinando hasta tres filtros
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Categoria>> buscarConFiltros(
+            @RequestParam(required = false) String nombre,
+            @RequestParam(required = false) String descripcion,
+            @RequestParam(required = false) Boolean activa) {
+        return ResponseEntity.ok(
+                categoriaService.buscarConFiltros(nombre, descripcion, activa));
+    }
+
     // Crear categoría
     @PostMapping
     public ResponseEntity<Categoria> crear(

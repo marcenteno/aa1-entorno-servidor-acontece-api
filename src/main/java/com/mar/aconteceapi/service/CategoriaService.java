@@ -37,6 +37,10 @@ public class CategoriaService {
         return categoriaRepository.findByActivaTrue();
     }
 
+    public List<Categoria> buscarConFiltros(String nombre, String descripcion, Boolean activa) {
+        return categoriaRepository.buscarConFiltros(nombre, descripcion, activa);
+    }
+
     @Transactional
     public Categoria crear(Categoria categoria) {
         return categoriaRepository.save(categoria);

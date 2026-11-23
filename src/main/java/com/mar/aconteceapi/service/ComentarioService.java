@@ -44,6 +44,13 @@ public class ComentarioService {
         return comentarioRepository.findByPuntuacion(puntuacion);
     }
 
+    // Buscar comentarios combinando hasta tres filtros
+    public List<Comentario> buscarConFiltros(
+            String titulo, Integer puntuacion, Boolean visible) {
+        return comentarioRepository.buscarConFiltros(
+                titulo, puntuacion, visible);
+    }
+
     @Transactional
     public Comentario crear(Comentario comentario) {
         return comentarioRepository.save(comentario);

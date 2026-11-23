@@ -62,6 +62,18 @@ public class ComentarioController {
                 comentarioService.buscarPorPuntuacion(puntuacion));
     }
 
+    // Buscar comentarios combinando hasta tres filtros
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Comentario>> buscarConFiltros(
+            @RequestParam(required = false) String titulo,
+            @RequestParam(required = false) Integer puntuacion,
+            @RequestParam(required = false) Boolean visible) {
+
+        return ResponseEntity.ok(
+                comentarioService.buscarConFiltros(
+                        titulo, puntuacion, visible));
+    }
+
     // Crear comentario
     @PostMapping
     public ResponseEntity<Comentario> crear(

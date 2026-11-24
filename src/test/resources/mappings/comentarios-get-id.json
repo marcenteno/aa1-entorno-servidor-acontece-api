@@ -1,0 +1,26 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/api/comentarios/1"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": 1,
+      "titulo": "Gran concierto",
+      "texto": "Me ha encantado el evento",
+      "puntuacion": 5,
+      "fechaComentario": "2026-11-20T12:00:00",
+      "visible": true,
+      "usuario": {
+        "id": 2
+      },
+      "evento": {
+        "id": 4
+      }
+    }
+  }
+}

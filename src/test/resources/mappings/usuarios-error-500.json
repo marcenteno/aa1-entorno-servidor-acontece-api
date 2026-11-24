@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/api/usuarios"
+  },
+  "response": {
+    "status": 500,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "fecha": "2026-11-19T10:00:00",
+      "estado": 500,
+      "error": "Error interno del servidor",
+      "mensaje": "Se ha producido un error inesperado"
+    }
+  }
+}

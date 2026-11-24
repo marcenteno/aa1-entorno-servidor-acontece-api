@@ -1,0 +1,1399 @@
+openapi: 3.0.3
+
+info:
+  title: Acontece API
+  description: API REST para gestionar usuarios, eventos, categorías, inscripciones y comentarios.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Servidor local de desarrollo
+
+tags:
+  - name: Usuarios
+    description: Operaciones relacionadas con los usuarios
+  - name: Eventos
+    description: Operaciones relacionadas con los eventos
+  - name: Categorías
+    description: Operaciones relacionadas con las categorías
+  - name: Inscripciones
+    description: Operaciones relacionadas con las inscripciones
+  - name: Comentarios
+    description: Operaciones relacionadas con los comentarios
+
+paths:
+
+  # =========================
+  # USUARIOS
+  # =========================
+
+  /api/usuarios:
+    get:
+      tags:
+        - Usuarios
+      summary: Obtener todos los usuarios
+      responses:
+        '200':
+          description: Lista de usuarios obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Usuario'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+    post:
+      tags:
+        - Usuarios
+      summary: Crear un usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+      responses:
+        '201':
+          description: Usuario creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+        '400':
+          $ref: '#/components/responses/ErrorValidacion'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/usuarios/{id}:
+    get:
+      tags:
+        - Usuarios
+      summary: Obtener un usuario por ID
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Usuario encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+        '404':
+          $ref: '#/components/responses/ErrorNoEncontrado'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+    put:
+      tags:
+        - Usuarios
+      summary: Actualizar un usuario
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+      responses:
+        '200':
+          description: Usuario actualizado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+        '400':
+          $ref: '#/components/responses/ErrorValidacion'
+        '404':
+          $ref: '#/components/responses/ErrorNoEncontrado'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+    delete:
+      tags:
+        - Usuarios
+      summary: Eliminar un usuario
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          description: Usuario eliminado correctamente
+        '404':
+          $ref: '#/components/responses/ErrorNoEncontrado'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/usuarios/buscar/email:
+    get:
+      tags:
+        - Usuarios
+      summary: Buscar usuario por email
+      parameters:
+        - name: email
+          in: query
+          required: true
+          schema:
+            type: string
+            format: email
+      responses:
+        '200':
+          description: Usuario encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+        '404':
+          $ref: '#/components/responses/ErrorNoEncontrado'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/usuarios/buscar/nombre:
+    get:
+      tags:
+        - Usuarios
+      summary: Buscar usuario por nombre
+      parameters:
+        - name: nombre
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Usuario encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+        '404':
+          $ref: '#/components/responses/ErrorNoEncontrado'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/usuarios/buscar:
+    get:
+      tags:
+        - Usuarios
+      summary: Buscar usuarios combinando hasta tres filtros
+      description: Permite buscar usuarios por nombre, apellidos y estado activo. Todos los parámetros son opcionales y se pueden combinar.
+      parameters:
+        - name: nombre
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Nombre del usuario
+        - name: apellidos
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Apellidos del usuario
+        - name: activo
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Estado activo del usuario
+      responses:
+        '200':
+          description: Lista de usuarios que cumplen los filtros indicados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Usuario'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  # =========================
+  # EVENTOS
+  # =========================
+
+  /api/eventos:
+    get:
+      tags:
+        - Eventos
+      summary: Obtener todos los eventos
+      responses:
+        '200':
+          description: Lista de eventos obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Evento'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+    post:
+      tags:
+        - Eventos
+      summary: Crear un evento
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Evento'
+      responses:
+        '201':
+          description: Evento creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Evento'
+        '400':
+          $ref: '#/components/responses/ErrorValidacion'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/eventos/{id}:
+    get:
+      tags:
+        - Eventos
+      summary: Obtener un evento por ID
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Evento encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Evento'
+        '404':
+          $ref: '#/components/responses/ErrorNoEncontrado'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+    put:
+      tags:
+        - Eventos
+      summary: Actualizar un evento
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Evento'
+      responses:
+        '200':
+          description: Evento actualizado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Evento'
+        '400':
+          $ref: '#/components/responses/ErrorValidacion'
+        '404':
+          $ref: '#/components/responses/ErrorNoEncontrado'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+    delete:
+      tags:
+        - Eventos
+      summary: Eliminar un evento
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          description: Evento eliminado correctamente
+        '404':
+          $ref: '#/components/responses/ErrorNoEncontrado'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/eventos/buscar/titulo:
+    get:
+      tags:
+        - Eventos
+      summary: Buscar eventos por título
+      parameters:
+        - name: titulo
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lista de eventos encontrados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Evento'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/eventos/buscar/ubicacion:
+    get:
+      tags:
+        - Eventos
+      summary: Buscar eventos por ubicación
+      parameters:
+        - name: ubicacion
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lista de eventos encontrados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Evento'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/eventos/activos:
+    get:
+      tags:
+        - Eventos
+      summary: Obtener eventos activos
+      responses:
+        '200':
+          description: Lista de eventos activos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Evento'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/eventos/organizador/{organizadorId}:
+    get:
+      tags:
+        - Eventos
+      summary: Obtener eventos de un organizador
+      parameters:
+        - name: organizadorId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Lista de eventos del organizador
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Evento'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/eventos/buscar:
+    get:
+      tags:
+        - Eventos
+      summary: Buscar eventos combinando hasta tres filtros
+      description: Permite buscar eventos por título, ubicación y estado activo. Todos los parámetros son opcionales y se pueden combinar.
+      parameters:
+        - name: titulo
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Título del evento
+        - name: ubicacion
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Ubicación del evento
+        - name: activo
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Estado activo del evento
+      responses:
+        '200':
+          description: Lista de eventos que cumplen los filtros indicados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Evento'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  # =========================
+  # CATEGORÍAS
+  # =========================
+
+  /api/categorias:
+    get:
+      tags:
+        - Categorías
+      summary: Obtener todas las categorías
+      responses:
+        '200':
+          description: Lista de categorías
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Categoria'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+    post:
+      tags:
+        - Categorías
+      summary: Crear una categoría
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Categoria'
+      responses:
+        '201':
+          description: Categoría creada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categoria'
+        '400':
+          $ref: '#/components/responses/ErrorValidacion'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/categorias/{id}:
+    get:
+      tags:
+        - Categorías
+      summary: Obtener una categoría por ID
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Categoría encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categoria'
+        '404':
+          $ref: '#/components/responses/ErrorNoEncontrado'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+    put:
+      tags:
+        - Categorías
+      summary: Actualizar una categoría
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Categoria'
+      responses:
+        '200':
+          description: Categoría actualizada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categoria'
+        '400':
+          $ref: '#/components/responses/ErrorValidacion'
+        '404':
+          $ref: '#/components/responses/ErrorNoEncontrado'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+    delete:
+      tags:
+        - Categorías
+      summary: Eliminar una categoría
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          description: Categoría eliminada correctamente
+        '404':
+          $ref: '#/components/responses/ErrorNoEncontrado'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/categorias/buscar/nombre:
+    get:
+      tags:
+        - Categorías
+      summary: Buscar categoría por nombre
+      parameters:
+        - name: nombre
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Categoría encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categoria'
+        '404':
+          $ref: '#/components/responses/ErrorNoEncontrado'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/categorias/activas:
+    get:
+      tags:
+        - Categorías
+      summary: Obtener categorías activas
+      responses:
+        '200':
+          description: Lista de categorías activas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Categoria'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+
+  /api/categorias/buscar:
+    get:
+      tags:
+        - Categorías
+      summary: Buscar categorías combinando hasta tres filtros
+      description: Permite buscar categorías por nombre, descripción y estado activo. Todos los parámetros son opcionales y se pueden combinar.
+      parameters:
+        - name: nombre
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Nombre de la categoría
+        - name: descripcion
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Descripción de la categoría
+        - name: activa
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Estado activo de la categoría
+      responses:
+        '200':
+          description: Lista de categorías que cumplen los filtros indicados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Categoria'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+
+  # =========================
+  # COMENTARIOS
+  # =========================
+
+  /api/comentarios:
+    get:
+      tags:
+        - Comentarios
+      summary: Obtener todos los comentarios
+      responses:
+        '200':
+          description: Lista de comentarios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comentario'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+    post:
+      tags:
+        - Comentarios
+      summary: Crear un comentario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comentario'
+      responses:
+        '201':
+          description: Comentario creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comentario'
+        '400':
+          $ref: '#/components/responses/ErrorValidacion'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/comentarios/{id}:
+    get:
+      tags:
+        - Comentarios
+      summary: Obtener un comentario por ID
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Comentario encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comentario'
+        '404':
+          $ref: '#/components/responses/ErrorNoEncontrado'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+    put:
+      tags:
+        - Comentarios
+      summary: Actualizar un comentario
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comentario'
+      responses:
+        '200':
+          description: Comentario actualizado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comentario'
+        '400':
+          $ref: '#/components/responses/ErrorValidacion'
+        '404':
+          $ref: '#/components/responses/ErrorNoEncontrado'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+    delete:
+      tags:
+        - Comentarios
+      summary: Eliminar un comentario
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          description: Comentario eliminado correctamente
+        '404':
+          $ref: '#/components/responses/ErrorNoEncontrado'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/comentarios/evento/{eventoId}:
+    get:
+      tags:
+        - Comentarios
+      summary: Obtener comentarios de un evento
+      parameters:
+        - name: eventoId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Lista de comentarios del evento
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comentario'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/comentarios/usuario/{usuarioId}:
+    get:
+      tags:
+        - Comentarios
+      summary: Obtener comentarios de un usuario
+      parameters:
+        - name: usuarioId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Lista de comentarios del usuario
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comentario'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/comentarios/visibles:
+    get:
+      tags:
+        - Comentarios
+      summary: Obtener comentarios visibles
+      responses:
+        '200':
+          description: Lista de comentarios visibles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comentario'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/comentarios/buscar/puntuacion:
+    get:
+      tags:
+        - Comentarios
+      summary: Buscar comentarios por puntuación
+      parameters:
+        - name: puntuacion
+          in: query
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
+      responses:
+        '200':
+          description: Lista de comentarios con esa puntuación
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comentario'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/comentarios/buscar:
+    get:
+      tags:
+        - Comentarios
+      summary: Buscar comentarios combinando hasta tres filtros
+      description: Permite buscar comentarios por título, puntuación y visibilidad. Todos los parámetros son opcionales y se pueden combinar.
+      parameters:
+        - name: titulo
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Título del comentario (búsqueda parcial)
+        - name: puntuacion
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
+          description: Puntuación del comentario
+        - name: visible
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Indica si el comentario es visible
+      responses:
+        '200':
+          description: Lista de comentarios que cumplen los filtros indicados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comentario'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+
+  # =========================
+  # INSCRIPCIONES
+  # =========================
+
+  /api/inscripciones:
+    get:
+      tags:
+        - Inscripciones
+      summary: Obtener todas las inscripciones
+      responses:
+        '200':
+          description: Lista de inscripciones
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Inscripcion'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+    post:
+      tags:
+        - Inscripciones
+      summary: Crear una inscripción
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inscripcion'
+      responses:
+        '201':
+          description: Inscripción creada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inscripcion'
+        '400':
+          $ref: '#/components/responses/ErrorValidacion'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/inscripciones/{id}:
+    get:
+      tags:
+        - Inscripciones
+      summary: Obtener una inscripción por ID
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Inscripción encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inscripcion'
+        '404':
+          $ref: '#/components/responses/ErrorNoEncontrado'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+    put:
+      tags:
+        - Inscripciones
+      summary: Actualizar una inscripción
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inscripcion'
+      responses:
+        '200':
+          description: Inscripción actualizada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inscripcion'
+        '400':
+          $ref: '#/components/responses/ErrorValidacion'
+        '404':
+          $ref: '#/components/responses/ErrorNoEncontrado'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+    delete:
+      tags:
+        - Inscripciones
+      summary: Eliminar una inscripción
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          description: Inscripción eliminada correctamente
+        '404':
+          $ref: '#/components/responses/ErrorNoEncontrado'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/inscripciones/usuario/{usuarioId}:
+    get:
+      tags:
+        - Inscripciones
+      summary: Obtener inscripciones de un usuario
+      parameters:
+        - name: usuarioId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Lista de inscripciones del usuario
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Inscripcion'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/inscripciones/evento/{eventoId}:
+    get:
+      tags:
+        - Inscripciones
+      summary: Obtener inscripciones de un evento
+      parameters:
+        - name: eventoId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Lista de inscripciones del evento
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Inscripcion'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+  /api/inscripciones/buscar/estado:
+    get:
+      tags:
+        - Inscripciones
+      summary: Buscar inscripciones por estado
+      parameters:
+        - name: estado
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lista de inscripciones con ese estado
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Inscripcion'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+
+  /api/inscripciones/buscar:
+    get:
+      tags:
+        - Inscripciones
+      summary: Buscar inscripciones combinando hasta tres filtros
+      description: Permite buscar inscripciones por estado, asistencia y precio pagado. Todos los parámetros son opcionales y se pueden combinar.
+      parameters:
+        - name: estado
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Estado de la inscripción
+        - name: asistencia
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Indica si el usuario ha asistido
+        - name: precioPagado
+          in: query
+          required: false
+          schema:
+            type: number
+            format: float
+          description: Precio abonado por la inscripción
+      responses:
+        '200':
+          description: Lista de inscripciones que cumplen los filtros indicados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Inscripcion'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+
+components:
+
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: Identificador del recurso
+      schema:
+        type: integer
+        format: int64
+
+  schemas:
+
+    Usuario:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 2
+          readOnly: true
+        nombre:
+          type: string
+          example: María
+          maxLength: 50
+        apellidos:
+          type: string
+          example: García López
+          maxLength: 80
+        email:
+          type: string
+          format: email
+          example: maria.prueba@example.com
+        password:
+          type: string
+          format: password
+          writeOnly: true
+          minLength: 8
+        fechaNacimiento:
+          type: string
+          format: date
+          example: '2005-04-15'
+          nullable: true
+        activo:
+          type: boolean
+          example: true
+          default: true
+      required:
+        - nombre
+        - apellidos
+        - email
+        - password
+
+    Evento:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 4
+          readOnly: true
+        titulo:
+          type: string
+          example: Concierto de prueba
+          maxLength: 100
+        descripcion:
+          type: string
+          example: Concierto de música en directo
+          maxLength: 500
+        ubicacion:
+          type: string
+          example: Zaragoza
+        fechaInicio:
+          type: string
+          format: date-time
+          example: '2026-12-20T18:00:00'
+        fechaFin:
+          type: string
+          format: date-time
+          example: '2026-12-20T22:00:00'
+        precio:
+          type: number
+          format: float
+          example: 15.5
+          minimum: 0
+        aforo:
+          type: integer
+          example: 100
+          minimum: 1
+        activo:
+          type: boolean
+          example: true
+          default: true
+        organizador:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+              example: 2
+          required:
+            - id
+        categoria:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+              example: 2
+          required:
+            - id
+      required:
+        - titulo
+        - descripcion
+        - ubicacion
+        - fechaInicio
+        - fechaFin
+        - precio
+        - aforo
+        - organizador
+        - categoria
+
+    Categoria:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 2
+          readOnly: true
+        nombre:
+          type: string
+          example: Música
+          maxLength: 50
+        descripcion:
+          type: string
+          example: Eventos musicales
+          maxLength: 200
+        color:
+          type: string
+          example: '#FF6B6B'
+          pattern: '^#[0-9A-Fa-f]{6}$'
+        icono:
+          type: string
+          example: music
+          nullable: true
+        fechaCreacion:
+          type: string
+          format: date
+          example: '2026-11-18'
+        activa:
+          type: boolean
+          example: true
+          default: true
+      required:
+        - nombre
+        - descripcion
+        - color
+        - fechaCreacion
+
+    Comentario:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 2
+          readOnly: true
+        titulo:
+          type: string
+          example: Muy buen evento
+          maxLength: 100
+        texto:
+          type: string
+          example: Me ha gustado mucho la experiencia
+          maxLength: 500
+        puntuacion:
+          type: integer
+          minimum: 1
+          maximum: 5
+          example: 5
+        fechaComentario:
+          type: string
+          format: date-time
+          example: '2026-11-18T18:30:00'
+        visible:
+          type: boolean
+          example: true
+          default: true
+        usuario:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+              example: 2
+          required:
+            - id
+        evento:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+              example: 4
+          required:
+            - id
+      required:
+        - titulo
+        - texto
+        - puntuacion
+        - fechaComentario
+        - usuario
+        - evento
+
+    Inscripcion:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          readOnly: true
+        fechaInscripcion:
+          type: string
+          format: date-time
+          example: '2026-11-18T18:30:00'
+        estado:
+          type: string
+          example: CONFIRMADA
+          maxLength: 20
+        asistencia:
+          type: boolean
+          example: false
+        precioPagado:
+          type: number
+          format: float
+          example: 15.5
+          minimum: 0
+        codigoEntrada:
+          type: string
+          example: ENTRADA-001
+          maxLength: 100
+          nullable: true
+        observaciones:
+          type: string
+          example: Acceso por la entrada principal
+          nullable: true
+        usuario:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+              example: 2
+          required:
+            - id
+        evento:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+              example: 4
+          required:
+            - id
+      required:
+        - fechaInscripcion
+        - estado
+        - asistencia
+        - precioPagado
+        - usuario
+        - evento
+
+  responses:
+
+    ErrorValidacion:
+      description: Los datos enviados no cumplen las validaciones
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              fecha:
+                type: string
+                format: date-time
+              estado:
+                type: integer
+                example: 400
+              error:
+                type: string
+                example: Error de validación
+              detalles:
+                type: object
+                additionalProperties:
+                  type: string
+
+    ErrorNoEncontrado:
+      description: El recurso solicitado no existe
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              fecha:
+                type: string
+                format: date-time
+              estado:
+                type: integer
+                example: 404
+              error:
+                type: string
+                example: No encontrado
+              mensaje:
+                type: string
+                example: Recurso no encontrado
+
+    ErrorInterno:
+      description: Se ha producido un error inesperado en el servidor
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              fecha:
+                type: string
+                format: date-time
+              estado:
+                type: integer
+                example: 500
+              error:
+                type: string
+                example: Error interno del servidor
+              mensaje:
+                type: string
+                example: Se ha producido un error inesperado

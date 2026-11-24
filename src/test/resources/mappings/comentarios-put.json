@@ -1,0 +1,26 @@
+{
+  "request": {
+    "method": "PUT",
+    "urlPath": "/api/comentarios/1"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": 1,
+      "titulo": "Concierto actualizado",
+      "texto": "El evento ha sido todavía mejor de lo esperado",
+      "puntuacion": 4,
+      "fechaComentario": "2026-11-20T12:00:00",
+      "visible": true,
+      "usuario": {
+        "id": 2
+      },
+      "evento": {
+        "id": 4
+      }
+    }
+  }
+}

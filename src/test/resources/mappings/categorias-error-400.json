@@ -1,0 +1,23 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/api/categorias"
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "fecha": "2026-11-20T10:00:00",
+      "estado": 400,
+      "error": "Error de validación",
+      "detalles": {
+        "nombre": "El nombre no puede estar vacío",
+        "descripcion": "La descripción no puede estar vacía",
+        "color": "El color debe tener un formato hexadecimal válido",
+        "fechaCreacion": "La fecha de creación es obligatoria"
+      }
+    }
+  }
+}

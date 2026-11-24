@@ -1,0 +1,1695 @@
+{
+  "info": {
+    "_postman_id": "9aac31ce-0883-4e73-8994-6369da796b42",
+    "name": "Acontece API",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "60375048",
+    "_collection_link": "https://go.postman.co/collection/60375048-9aac31ce-0883-4e73-8994-6369da796b42?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Obtener todos los usuarios",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de usuarios\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"titulo\": \"Comentario de prueba\",\r\n  \"texto\": \"Prueba de puntuación incorrecta\",\r\n  \"puntuacion\": 6,\r\n  \"fechaComentario\": \"2026-11-20T13:00:00\",\r\n  \"visible\": true,\r\n  \"usuario\": {\r\n    \"id\": 2\r\n  },\r\n  \"evento\": {\r\n    \"id\": 4\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/usuarios",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "usuarios"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Obtener Usuario por ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene un usuario\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"object\");\r\n    pm.expect(pm.response.json()).to.have.property(\"id\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/usuarios/2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "usuarios",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Obtener usuario por email",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene el email solicitado\", function () {\r\n    pm.expect(pm.response.json()).to.have.property(\"email\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/usuarios/buscar/email?email=maria.prueba@example.com",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "usuarios",
+            "buscar",
+            "email"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "maria.prueba@example.com"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar usuarios por nombre",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene un usuario\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"object\");\r\n    pm.expect(pm.response.json()).to.have.property(\"id\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/usuarios/buscar/nombre?nombre=María",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "usuarios",
+            "buscar",
+            "nombre"
+          ],
+          "query": [
+            {
+              "key": "nombre",
+              "value": "María"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar usuarios con filtros",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de usuarios\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/usuarios/buscar?nombre=María&apellidos=García&activo=true",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "usuarios",
+            "buscar"
+          ],
+          "query": [
+            {
+              "key": "nombre",
+              "value": "María"
+            },
+            {
+              "key": "apellidos",
+              "value": "García"
+            },
+            {
+              "key": "activo",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Obtener todos los eventos",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de eventos\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/eventos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "eventos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Obtener Evento por ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene un evento\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"object\");\r\n    pm.expect(pm.response.json()).to.have.property(\"id\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/eventos/4",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "eventos",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar eventos por título",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de eventos\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/eventos/buscar/titulo?titulo=Concierto",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "eventos",
+            "buscar",
+            "titulo"
+          ],
+          "query": [
+            {
+              "key": "titulo",
+              "value": "Concierto"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar eventos por ubicación",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de eventos\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/eventos/buscar/ubicacion?ubicacion=Zaragoza",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "eventos",
+            "buscar",
+            "ubicacion"
+          ],
+          "query": [
+            {
+              "key": "ubicacion",
+              "value": "Zaragoza"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Consultar los eventos activos",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de eventos\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/eventos/activos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "eventos",
+            "activos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar eventos por organizador",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de eventos\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/eventos/organizador/2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "eventos",
+            "organizador",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar eventos con filtros",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de eventos\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/eventos/buscar?titulo=Concierto&ubicacion=Zaragoza&activo=true",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "eventos",
+            "buscar"
+          ],
+          "query": [
+            {
+              "key": "titulo",
+              "value": "Concierto"
+            },
+            {
+              "key": "ubicacion",
+              "value": "Zaragoza"
+            },
+            {
+              "key": "activo",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Obtener todas las categorías",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de categorías\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/categorias",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "categorias"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Obtener una categoría por ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una categoría\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"object\");\r\n    pm.expect(pm.response.json()).to.have.property(\"id\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/categorias/2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "categorias",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar categorías por nombre",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una categoría\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"object\");\r\n    pm.expect(pm.response.json()).to.have.property(\"id\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/categorias/buscar/nombre?nombre=Música",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "categorias",
+            "buscar",
+            "nombre"
+          ],
+          "query": [
+            {
+              "key": "nombre",
+              "value": "Música"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Categorías activas",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de categorías\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/categorias/activas",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "categorias",
+            "activas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Categorías búsqueda combinada",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de categorías\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/categorias/buscar?nombre=Música&descripcion=Eventos y actividades musicales&activa=true",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "categorias",
+            "buscar"
+          ],
+          "query": [
+            {
+              "key": "nombre",
+              "value": "Música"
+            },
+            {
+              "key": "descripcion",
+              "value": "Eventos y actividades musicales"
+            },
+            {
+              "key": "activa",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Obtener todas las inscripciones",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de inscripciones\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/inscripciones",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "inscripciones"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Obtener una inscripción por ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una inscripción\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"object\");\r\n    pm.expect(pm.response.json()).to.have.property(\"id\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/inscripciones/2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "inscripciones",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar inscripciones por usuario",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de inscripciones\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/inscripciones/usuario/2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "inscripciones",
+            "usuario",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar inscripciones por evento",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de inscripciones\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/inscripciones/evento/4",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "inscripciones",
+            "evento",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar inscripciones por estado",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de inscripciones\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/inscripciones/buscar/estado?estado=CONFIRMADA",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "inscripciones",
+            "buscar",
+            "estado"
+          ],
+          "query": [
+            {
+              "key": "estado",
+              "value": "CONFIRMADA"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Inscripciones búsqueda combinada de los tres filtros",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de inscripciones\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});\r\n\r\npm.test(\"La inscripción cumple los tres filtros\", function () {\r\n    const inscripciones = pm.response.json();\r\n\r\n    pm.expect(inscripciones.length).to.be.greaterThan(0);\r\n\r\n    inscripciones.forEach(function (inscripcion) {\r\n        pm.expect(inscripcion.estado).to.eql(\"CONFIRMADA\");\r\n        pm.expect(inscripcion.asistencia).to.eql(false);\r\n        pm.expect(inscripcion.precioPagado).to.eql(18.5);\r\n    });\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/inscripciones/buscar?estado=CONFIRMADA&asistencia=false&precioPagado=18.5",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "inscripciones",
+            "buscar"
+          ],
+          "query": [
+            {
+              "key": "estado",
+              "value": "CONFIRMADA"
+            },
+            {
+              "key": "asistencia",
+              "value": "false"
+            },
+            {
+              "key": "precioPagado",
+              "value": "18.5"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Obtener todos los comentarios",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de comentarios\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/comentarios",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "comentarios"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Obtener un comentario por ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene un comentario\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"object\");\r\n    pm.expect(pm.response.json()).to.have.property(\"id\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/comentarios/3",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "comentarios",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar comentarios por evento",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de comentarios\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/comentarios/evento/4",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "comentarios",
+            "evento",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar comentarios por usuario",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de comentarios\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/comentarios/usuario/2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "comentarios",
+            "usuario",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar comentarios visibles",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de comentarios\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});\r\n\r\npm.test(\"Todos los comentarios devueltos son visibles\", function () {\r\n    const comentarios = pm.response.json();\r\n\r\n    comentarios.forEach(function (comentario) {\r\n        pm.expect(comentario.visible).to.eql(true);\r\n    });\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/comentarios/visibles",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "comentarios",
+            "visibles"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar comentarios por puntuación",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de comentarios\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});\r\n\r\npm.test(\"Todos los comentarios tienen puntuación 5\", function () {\r\n    const comentarios = pm.response.json();\r\n\r\n    comentarios.forEach(function (comentario) {\r\n        pm.expect(comentario.puntuacion).to.eql(5);\r\n    });\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/comentarios/buscar/puntuacion?puntuacion=5",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "comentarios",
+            "buscar",
+            "puntuacion"
+          ],
+          "query": [
+            {
+              "key": "puntuacion",
+              "value": "5"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Comentarios búsqueda combinada de los tres filtros",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de comentarios\", function () {\r\n    pm.expect(pm.response.json()).to.be.an(\"array\");\r\n});\r\n\r\npm.test(\"Todos los comentarios cumplen los tres filtros\", function () {\r\n    const comentarios = pm.response.json();\r\n\r\n    pm.expect(comentarios.length).to.be.greaterThan(0);\r\n\r\n    comentarios.forEach(function (comentario) {\r\n        pm.expect(comentario.titulo.toLowerCase()).to.include(\"muy buen concierto\");\r\n        pm.expect(comentario.puntuacion).to.eql(5);\r\n        pm.expect(comentario.visible).to.eql(true);\r\n    });\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/comentarios/buscar?titulo=Muy buen concierto&puntuacion=5&visible=true",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "comentarios",
+            "buscar"
+          ],
+          "query": [
+            {
+              "key": "titulo",
+              "value": "Muy buen concierto"
+            },
+            {
+              "key": "puntuacion",
+              "value": "5"
+            },
+            {
+              "key": "visible",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Crear usuario",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código correcto\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r\n});\r\n\r\npm.test(\"La respuesta contiene un usuario creado\", function () {\r\n    const usuario = pm.response.json();\r\n\r\n    pm.expect(usuario).to.be.an(\"object\");\r\n    pm.expect(usuario).to.have.property(\"id\");\r\n});\r\n\r\npm.test(\"El usuario creado contiene los datos enviados\", function () {\r\n    const usuario = pm.response.json();\r\n\r\n    pm.expect(usuario.nombre).to.eql(\"Lucía\");\r\n    pm.expect(usuario.apellidos).to.eql(\"Fernández Martín\");\r\n    pm.expect(usuario.email).to.eql(\"lucia.prueba20261123@example.com\");\r\n    pm.expect(usuario.activo).to.eql(true);\r\n});\r\n\r\n// Guardar automáticamente el ID del usuario creado\r\nconst usuarioCreado = pm.response.json();\r\npm.collectionVariables.set(\"usuarioId\", usuarioCreado.id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"Lucía\",\r\n  \"apellidos\": \"Fernández Martín\",\r\n  \"email\": \"lucia.prueba20261123@example.com\",\r\n  \"password\": \"Lucia2026!\",\r\n  \"fechaNacimiento\": \"2003-04-12\",\r\n  \"activo\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/usuarios",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "usuarios"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Actualizar usuario",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene un usuario actualizado\", function () {\r\n    const usuario = pm.response.json();\r\n\r\n    pm.expect(usuario).to.be.an(\"object\");\r\n    pm.expect(usuario).to.have.property(\"id\");\r\n});\r\n\r\npm.test(\"El usuario contiene los datos actualizados\", function () {\r\n    const usuario = pm.response.json();\r\n\r\n    pm.expect(usuario.nombre).to.eql(\"Lucía\");\r\n    pm.expect(usuario.apellidos).to.eql(\"Fernández Martín\");\r\n    pm.expect(usuario.email).to.eql(\"lucia.actualizada2026@example.com\");\r\n    pm.expect(usuario.activo).to.eql(false);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"Lucía\",\r\n  \"apellidos\": \"Fernández Martín\",\r\n  \"email\": \"lucia.actualizada2026@example.com\",\r\n  \"password\": \"Lucia2026!\",\r\n  \"fechaNacimiento\": \"2003-04-12\",\r\n  \"activo\": false\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/usuarios/{{usuarioId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "usuarios",
+            "{{usuarioId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE de usuarios",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código correcto al eliminar\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r\n});\r\n\r\npm.test(\"El usuario se ha eliminado correctamente\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/usuarios/{{usuarioId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "usuarios",
+            "{{usuarioId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Crear evento",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código correcto\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r\n});\r\n\r\npm.test(\"La respuesta contiene un evento creado\", function () {\r\n    const evento = pm.response.json();\r\n\r\n    pm.expect(evento).to.be.an(\"object\");\r\n    pm.expect(evento).to.have.property(\"id\");\r\n});\r\n\r\npm.test(\"El evento contiene los datos enviados\", function () {\r\n    const evento = pm.response.json();\r\n\r\n    pm.expect(evento.titulo).to.eql(\"Festival de prueba\");\r\n    pm.expect(evento.ubicacion).to.eql(\"Zaragoza\");\r\n    pm.expect(evento.aforo).to.eql(150);\r\n    pm.expect(evento.activo).to.eql(true);\r\n});\r\n\r\n// Guardar automáticamente el ID del evento creado\r\nif (pm.response.code === 200 || pm.response.code === 201) {\r\n    const eventoCreado = pm.response.json();\r\n    pm.collectionVariables.set(\"eventoId\", eventoCreado.id);\r\n}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"titulo\": \"Festival de prueba\",\r\n  \"descripcion\": \"Evento creado para comprobar el POST de la API\",\r\n  \"fechaInicio\": \"2027-06-15T18:00:00\",\r\n  \"fechaFin\": \"2027-06-15T23:00:00\",\r\n  \"ubicacion\": \"Zaragoza\",\r\n  \"aforo\": 150,\r\n  \"precio\": 20.0,\r\n  \"activo\": true,\r\n  \"organizador\": {\r\n    \"id\": 2\r\n  },\r\n  \"categoria\": {\r\n    \"id\": 2\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/eventos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "eventos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Actualizar evento",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene un evento actualizado\", function () {\r\n    const evento = pm.response.json();\r\n\r\n    pm.expect(evento).to.be.an(\"object\");\r\n    pm.expect(evento).to.have.property(\"id\");\r\n});\r\n\r\npm.test(\"El evento contiene los datos actualizados\", function () {\r\n    const evento = pm.response.json();\r\n\r\n    pm.expect(evento.titulo).to.eql(\"Festival de música actualizado\");\r\n    pm.expect(evento.ubicacion).to.eql(\"Zaragoza\");\r\n    pm.expect(evento.aforo).to.eql(180);\r\n    pm.expect(evento.activo).to.eql(false);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"titulo\": \"Festival de música actualizado\",\r\n  \"descripcion\": \"Evento actualizado para comprobar el PUT de la API\",\r\n  \"fechaInicio\": \"2027-06-15T19:00:00\",\r\n  \"fechaFin\": \"2027-06-15T23:30:00\",\r\n  \"ubicacion\": \"Zaragoza\",\r\n  \"aforo\": 180,\r\n  \"precio\": 25.0,\r\n  \"activo\": false,\r\n  \"organizador\": {\r\n    \"id\": 2\r\n  },\r\n  \"categoria\": {\r\n    \"id\": 2\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/eventos/{{eventoId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "eventos",
+            "{{eventoId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Eliminar evento",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código correcto al eliminar\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r\n});\r\n\r\npm.test(\"El evento se ha eliminado correctamente\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/eventos/{{eventoId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "eventos",
+            "{{eventoId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Crear categoría",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código correcto\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r\n});\r\n\r\npm.test(\"La respuesta contiene una categoría creada\", function () {\r\n    const categoria = pm.response.json();\r\n\r\n    pm.expect(categoria).to.be.an(\"object\");\r\n    pm.expect(categoria).to.have.property(\"id\");\r\n});\r\n\r\npm.test(\"La categoría contiene los datos enviados\", function () {\r\n    const categoria = pm.response.json();\r\n\r\n    pm.expect(categoria.nombre).to.eql(\"Deportes\");\r\n    pm.expect(categoria.descripcion).to.eql(\"Eventos y actividades deportivas\");\r\n    pm.expect(categoria.activa).to.eql(true);\r\n});\r\n\r\n// Guardar automáticamente el ID de la categoría creada\r\nif (pm.response.code === 200 || pm.response.code === 201) {\r\n    const categoriaCreada = pm.response.json();\r\n    pm.collectionVariables.set(\"categoriaId\", categoriaCreada.id);\r\n}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"Deportes\",\r\n  \"descripcion\": \"Eventos y actividades deportivas\",\r\n  \"color\": \"#36A2EB\",\r\n  \"icono\": \"deporte\",\r\n  \"fechaCreacion\": \"2026-11-23\",\r\n  \"activa\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/categorias",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "categorias"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Actualizar categoría",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una categoría actualizada\", function () {\r\n    const categoria = pm.response.json();\r\n\r\n    pm.expect(categoria).to.be.an(\"object\");\r\n    pm.expect(categoria).to.have.property(\"id\");\r\n});\r\n\r\npm.test(\"La categoría contiene los datos actualizados\", function () {\r\n    const categoria = pm.response.json();\r\n\r\n    pm.expect(categoria.nombre).to.eql(\"Deportes y ocio\");\r\n    pm.expect(categoria.descripcion).to.eql(\"Eventos deportivos y actividades de ocio\");\r\n    pm.expect(categoria.activa).to.eql(false);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"Deportes y ocio\",\r\n  \"descripcion\": \"Eventos deportivos y actividades de ocio\",\r\n  \"color\": \"#36A2EB\",\r\n  \"icono\": \"deporte\",\r\n  \"fechaCreacion\": \"2026-11-23\",\r\n  \"activa\": false\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/categorias/{{categoriaId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "categorias",
+            "{{categoriaId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Eliminar categoría",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código correcto al eliminar\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r\n});\r\n\r\npm.test(\"La categoría se ha eliminado correctamente\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/categorias/{{categoriaId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "categorias",
+            "{{categoriaId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Crear inscripción",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API crea la inscripción correctamente\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r\n});\r\n\r\npm.test(\"La respuesta contiene una inscripción\", function () {\r\n    const inscripcion = pm.response.json();\r\n\r\n    pm.expect(inscripcion).to.be.an(\"object\");\r\n    pm.expect(inscripcion).to.have.property(\"id\");\r\n\r\n    // Guardar automáticamente el ID para las siguientes peticiones\r\n    pm.environment.set(\"inscripcionId\", inscripcion.id);\r\n});\r\n\r\npm.test(\"La inscripción contiene los datos enviados\", function () {\r\n    const inscripcion = pm.response.json();\r\n\r\n    pm.expect(inscripcion.estado).to.eql(\"PENDIENTE\");\r\n    pm.expect(inscripcion.asistencia).to.eql(false);\r\n    pm.expect(inscripcion.precioPagado).to.eql(15.5);\r\n    pm.expect(inscripcion.codigoEntrada).to.eql(\"ACONTECE-TEST-005\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"fechaInscripcion\": \"2026-11-24T12:00:00\",\r\n    \"estado\": \"PENDIENTE\",\r\n    \"asistencia\": false,\r\n    \"precioPagado\": 15.5,\r\n    \"codigoEntrada\": \"ACONTECE-TEST-005\",\r\n    \"observaciones\": \"Inscripción de prueba para comprobar el POST\",\r\n    \"usuario\": {\r\n        \"id\": 2\r\n    },\r\n    \"evento\": {\r\n        \"id\": 7\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/inscripciones",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "inscripciones"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Actualizar inscripción",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API actualiza la inscripción correctamente\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene la inscripción actualizada\", function () {\r\n    const inscripcion = pm.response.json();\r\n\r\n    pm.expect(inscripcion).to.be.an(\"object\");\r\n    pm.expect(inscripcion.id).to.eql(Number(pm.environment.get(\"inscripcionId\")));\r\n});\r\n\r\npm.test(\"La inscripción contiene los datos actualizados\", function () {\r\n    const inscripcion = pm.response.json();\r\n\r\n    pm.expect(inscripcion.estado).to.eql(\"CONFIRMADA\");\r\n    pm.expect(inscripcion.asistencia).to.eql(false);\r\n    pm.expect(inscripcion.precioPagado).to.eql(15.5);\r\n    pm.expect(inscripcion.codigoEntrada).to.eql(\"ACONTECE-TEST-005\");\r\n    pm.expect(inscripcion.observaciones).to.eql(\"Inscripción actualizada para comprobar el PUT\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"fechaInscripcion\": \"2026-11-24T12:00:00\",\r\n    \"estado\": \"CONFIRMADA\",\r\n    \"asistencia\": false,\r\n    \"precioPagado\": 15.5,\r\n    \"codigoEntrada\": \"ACONTECE-TEST-005\",\r\n    \"observaciones\": \"Inscripción actualizada para comprobar el PUT\",\r\n    \"usuario\": {\r\n        \"id\": 2\r\n    },\r\n    \"evento\": {\r\n        \"id\": 7\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/inscripciones/{{inscripcionId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "inscripciones",
+            "{{inscripcionId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Eliminar inscripción",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API elimina la inscripción correctamente\", function () {\r\n    pm.expect(pm.response.code).to.eql(204);\r\n});\r\n\r\npm.test(\"La inscripción se ha eliminado\", function () {\r\n    pm.expect(pm.response.text()).to.be.empty;\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/inscripciones/{{inscripcionId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "inscripciones",
+            "{{inscripcionId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Crear comentarios",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API crea el comentario correctamente\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r\n});\r\n\r\npm.test(\"La respuesta contiene un comentario\", function () {\r\n    const comentario = pm.response.json();\r\n\r\n    pm.expect(comentario).to.be.an(\"object\");\r\n    pm.expect(comentario).to.have.property(\"id\");\r\n\r\n    // Guardar el ID para las siguientes peticiones\r\n    pm.environment.set(\"comentarioId\", comentario.id);\r\n});\r\n\r\npm.test(\"El comentario contiene los datos enviados\", function () {\r\n    const comentario = pm.response.json();\r\n\r\n    pm.expect(comentario.titulo).to.eql(\"Evento genial\");\r\n    pm.expect(comentario.puntuacion).to.eql(5);\r\n    pm.expect(comentario.visible).to.eql(true);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"titulo\": \"Evento genial\",\r\n  \"texto\": \"Me ha encantado el concierto. Muy buena organización y ambiente.\",\r\n  \"puntuacion\": 5,\r\n  \"fechaComentario\": \"2026-11-23T18:00:00\",\r\n  \"visible\": true,\r\n  \"usuario\": {\r\n    \"id\": 4\r\n  },\r\n  \"evento\": {\r\n    \"id\": 4\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/comentarios",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "comentarios"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Actualizar comentarios",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene el comentario actualizado\", function () {\r\n    const comentario = pm.response.json();\r\n\r\n    pm.expect(comentario).to.be.an(\"object\");\r\n    pm.expect(comentario.id).to.eql(Number(pm.environment.get(\"comentarioId\")));\r\n});\r\n\r\npm.test(\"El comentario contiene los datos actualizados\", function () {\r\n    const comentario = pm.response.json();\r\n\r\n    pm.expect(comentario.titulo).to.eql(\"Evento genial actualizado\");\r\n    pm.expect(comentario.puntuacion).to.eql(4);\r\n    pm.expect(comentario.visible).to.eql(true);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"titulo\": \"Evento genial actualizado\",\r\n  \"texto\": \"Me ha encantado el concierto. Muy buena organización y ambiente. Lo recomiendo.\",\r\n  \"puntuacion\": 4,\r\n  \"fechaComentario\": \"2026-11-24T18:00:00\",\r\n  \"visible\": true,\r\n  \"usuario\": {\r\n    \"id\": 4\r\n  },\r\n  \"evento\": {\r\n    \"id\": 4\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/comentarios/{{comentarioId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "comentarios",
+            "{{comentarioId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Eliminar comentarios",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API elimina el comentario correctamente\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r\n});\r\n\r\npm.test(\"El comentario se ha eliminado correctamente\", function () {\r\n    pm.expect(pm.response.text()).to.be.empty;\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/comentarios/{{comentarioId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "comentarios",
+            "{{comentarioId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Error 400 - Crear usuario",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un error 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"\",\r\n  \"apellidos\": \"Prueba\",\r\n  \"email\": \"correo-no-valido\",\r\n  \"password\": \"123\",\r\n  \"fechaNacimiento\": \"2005-06-15\",\r\n  \"activo\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/usuarios",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "usuarios"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Error 404 - Usuario inexistente",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un error 404\", function () {\r\n    pm.response.to.have.status(404);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/usuarios/99999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "usuarios",
+            "99999"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Error 500 - Email duplicado",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API devuelve un error 500\", function () {\r\n    pm.response.to.have.status(500);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"Usuario\",\r\n  \"apellidos\": \"Duplicado\",\r\n  \"email\": \"maria.prueba@example.com\",\r\n  \"password\": \"Prueba1234\",\r\n  \"fechaNacimiento\": \"2005-06-15\",\r\n  \"activo\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/usuarios",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "usuarios"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "usuarioId",
+      "value": ""
+    },
+    {
+      "key": "eventoId",
+      "value": ""
+    },
+    {
+      "key": "categoriaId",
+      "value": ""
+    }
+  ]
+}

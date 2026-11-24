@@ -1,0 +1,23 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/api/categorias"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": [
+      {
+        "id": 2,
+        "nombre": "Música",
+        "descripcion": "Eventos musicales y conciertos",
+        "color": "#FF6B6B",
+        "icono": "music",
+        "fechaCreacion": "2026-11-20",
+        "activa": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/api/usuarios"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": [
+      {
+        "id": 2,
+        "nombre": "Maria",
+        "apellidos": "Prueba",
+        "email": "maria.prueba@example.com",
+        "fechaNacimiento": "2005-05-15",
+        "activo": true
+      }
+    ]
+  }
+}

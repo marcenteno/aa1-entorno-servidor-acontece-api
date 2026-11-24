@@ -99,6 +99,14 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- WireMock para simular la API en las pruebas -->
+        <dependency>
+            <groupId>org.wiremock</groupId>
+            <artifactId>wiremock</artifactId>
+            <version>3.13.2</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

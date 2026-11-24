@@ -1,0 +1,29 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/api/eventos"
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": 5,
+      "titulo": "Nuevo evento",
+      "descripcion": "Evento creado mediante WireMock",
+      "ubicacion": "Zaragoza",
+      "fechaInicio": "2026-12-21T18:00:00",
+      "fechaFin": "2026-12-21T21:00:00",
+      "precio": 10.0,
+      "aforo": 100,
+      "activo": true,
+      "organizador": {
+        "id": 2
+      },
+      "categoria": {
+        "id": 2
+      }
+    }
+  }
+}

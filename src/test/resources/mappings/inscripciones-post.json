@@ -1,0 +1,35 @@
+{
+  "request": {
+    "method": "POST",
+    "urlPath": "/api/inscripciones",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": {
+          "expression": "$.estado",
+          "equalTo": "CONFIRMADA"
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": 2,
+      "fechaInscripcion": "2026-11-20T10:00:00",
+      "estado": "CONFIRMADA",
+      "asistencia": false,
+      "precioPagado": 15.0,
+      "codigoEntrada": "ENTRADA-002",
+      "observaciones": "Nueva inscripción",
+      "usuario": {
+        "id": 2
+      },
+      "evento": {
+        "id": 4
+      }
+    }
+  }
+}

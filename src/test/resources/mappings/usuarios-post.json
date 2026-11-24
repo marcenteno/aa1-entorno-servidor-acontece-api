@@ -1,0 +1,20 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/api/usuarios"
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": 5,
+      "nombre": "Laura",
+      "apellidos": "Garcia",
+      "email": "laura.prueba@example.com",
+      "fechaNacimiento": "2004-08-12",
+      "activo": true
+    }
+  }
+}

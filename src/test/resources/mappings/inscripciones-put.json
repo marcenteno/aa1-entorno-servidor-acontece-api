@@ -1,0 +1,27 @@
+{
+  "request": {
+    "method": "PUT",
+    "urlPath": "/api/inscripciones/1"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": 1,
+      "fechaInscripcion": "2026-11-20T10:00:00",
+      "estado": "COMPLETADA",
+      "asistencia": true,
+      "precioPagado": 15.0,
+      "codigoEntrada": "ENTRADA-001",
+      "observaciones": "Inscripción actualizada",
+      "usuario": {
+        "id": 2
+      },
+      "evento": {
+        "id": 4
+      }
+    }
+  }
+}
